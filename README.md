@@ -84,6 +84,9 @@ heroku create flexbox-mapbox-material-mern
 ```java
 heroku config:set
 
+heroku config:set MONGODB_URI="mongodb+srv://<userid>:<password>@cluster0.zadqe.mongodb.net/flexbox-mapbox-material-mern?retryWrites=true&w=majority"
+heroku config:set PASSWORD="something-secret"
+
 heroku config:set PUBLIC_URL="https://flexbox-mapbox-material-mern.herokuapp.com"
 ```
 

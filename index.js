@@ -42,6 +42,8 @@ const __parent = path.resolve(__dirname, "..");
 
 const root = path.join(__parent, "client", "build");
 
+console.log("root", root);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(root));
   app.get("*", (req, res) => res.sendFile("index.html", { root }));

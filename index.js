@@ -30,12 +30,6 @@ app.use(morgan("common"));
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "You are server",
-  });
-});
-
 app.use("/api/entry", entry);
 app.use("/api/entry/remove/:id", entry);
 app.use("/api/entry/update/:id", entry);
@@ -46,6 +40,12 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "You are server",
+  });
+});
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);

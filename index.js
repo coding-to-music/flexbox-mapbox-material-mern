@@ -34,18 +34,35 @@ app.use("/api/entry", entry);
 app.use("/api/entry/remove/:id", entry);
 app.use("/api/entry/update/:id", entry);
 
+// const __dirname = path.resolve();
+// console.log("__dirname", __dirname);
+
+const __parent = path.resolve(__dirname, "..");
+// console.log("__parent", __parent);
+
+const root = path.join(__parent, "client", "build");
+
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  app.use(express.static(root));
+  app.get("*", (req, res) => res.sendFile("index.html", { root }));
+} else {
+  app.get("/", (req, res) => {
+    res.send("API IS RUNNING......");
   });
 }
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "You are server",
-  });
-});
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
+
+// app.get("/", (req, res) => {
+//   res.json({
+//     message: "You are server",
+//   });
+// });
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
